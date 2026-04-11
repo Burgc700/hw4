@@ -13,6 +13,7 @@ char line_numbers[MAX_LINES][MAX_LINE_LEN]; //stores whole single lines of the f
 int results[MAX_LINES]; 					//stores the max ASCII value for the line
 int num_lines_read = 0;						//tracks number of lines read
 
+//Opens the file and the reads the contents in the file.
 void read_file() {
 	//opens file
 	int file = open("/homes/eyv/cis520/wiki_dump.txt", O_RDONLY);
@@ -79,6 +80,7 @@ void read_file() {
 	close(file);
 }
 
+//Adds the file to the correct array and finds the value with the highest ascii value per row.
 void *count_array(void *myID)
 {
 	long id = (long) myID;		//converts myID to a long
@@ -116,6 +118,7 @@ void *count_array(void *myID)
 	return NULL;
 }
 
+//Prints the results of the arrays to the command prompt.
 void print_results()
 {
 	//Loops through the lines read to get the line number
@@ -126,18 +129,13 @@ void print_results()
 }
 
 int main(int argc, char* argv[]) {
-	// int rc;
-	// pthread_t threads[NUM_THREADS];
-	// pthread_attr_t attr;
-	// void *status;
-
 	if(argc < 2)
 	{
 		fprintf(stderr, "Usage: %s <num_threads>\n", argv[0]);
 		return 1;
 	}
 
-	NUM_THREADS = atoi(argv[1]);
+	NUM_THREADS = atoi(argv[1]); //Lets you change the number of threads when manual testing to make sure it runs
 	if(NUM_THREADS <= 0)
 	{
 		fprintf(stderr, "Number of threads must be greater than 0\n");
