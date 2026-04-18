@@ -1,0 +1,46 @@
+Pthreads testing: naming test_<threadnum>threads_<testnum>
+Changing number of threads on 1G 500000 lines
+Number of threads: 2: 2.588, 2.562, 2.617, 2.622, 2.591
+Number of threads: 4: 2.453, 2.496, 2.482, 2.513, 2.536
+Number of threads: 8: 2.416, 2.649, 2.549, 2.494, 2.364
+Number of threads: 16: 2.350, 2.423, 2.385, 2.405, 2.434
+1 Thread doing this test does not run
+
+Pthreads testing: 
+Changing number of threads on 3G on 1000000 lines
+Number of Threads: 2: 5.478, 5.541, 5.525, 5.389
+Number of threads: 4: 5.780, 5.316, 4.643, 4.729, 5.164
+Number of threads: 8: 4.744, 4.700, 4.665, 4.679, 4.618
+Number of threads: 16: Can not fit on a single mole node.
+
+Memory per core testing:
+4 thread, 100000 lines
+64MB: Not enough memory to run the full set
+128MB: .504, .489, .489, .498, .489
+512MB: .493, .495, .482, .497, .507
+1G: .505, .483, .493, .501, .487
+1.5G: .492, .490, .484, .491, .493
+2G: .469, .510, .498, .487, .501
+
+Memory per core test:
+16 threads, 100000
+64MB: .501, .494, .489, .494, .492
+128MB: .482, .485, .467, .490, .479
+512MB: .499, .481, .477, .477, .481
+1G: .487, .488, .490, .484, .476
+1.5G: .482, .474, .499, .492, .491
+2G: Overflows the memory of the system or core.
+
+Number of lines read test:
+4 threads 1G
+1000: .008, .008, .008, .008, .009
+10000: .052, .057, .054, 0.054, .056
+100000: .499, .474, .497, .488, .485
+1000000: 4.941, 4.910, 4.842, 4.838, 4.926
+
+Number of lines read test: 
+16 threads 512MB
+1000: .009, .010, .010, .010, .010
+10000: .054, .056, .055, .057, .054
+100000: .491, .491, .490, .493, .489
+1000000: 4.779, 4.779, 4.682, 4.723, 4.713

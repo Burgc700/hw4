@@ -9,8 +9,8 @@
 #define MAX_LINE_LEN 4096
 
 int NUM_THREADS;							 //Made this an int to run the number of cores testing from command line.
-char line_numbers[MAX_LINES][MAX_LINE_LEN]; //stores whole single lines of the file
-int results[MAX_LINES]; 					//stores the max ASCII value for the line
+char (*line_numbers)[MAX_LINE_LEN];                       //pointer that tracks the number of the lines that have been read so far
+int *results;                                            //Pointer that tracks our highest ASCII value from the lines in the file.
 int num_lines_read = 0;						//tracks number of lines read
 
 //Opens the file and the reads the contents in the file.
@@ -114,8 +114,8 @@ void *count_array(void *myID)
 		}
 		results[i] = max_ascii;	//Adds that ascii value from the previous line to our array 
 	}
-	//pthread_exit(NULL);
-	return NULL;
+	pthread_exit(NULL);
+	//return NULL;
 }
 
 //Prints the results of the arrays to the command prompt.
@@ -142,6 +142,18 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	//Allocates memory for the number of lines read so it can read more lines.
+    line_numbers = malloc(sizeof(*line_numbers) * MAX_LINES);
+    //Allocates memory for the results of the highest ASCII for each line.
+    results = malloc(sizeof(*results) * MAX_LINES);
+    //checks to make sure our line number and results are not null.
+    if(line_numbers == NULL || results == NULL)
+    {
+        perror("malloc failed");
+        return 1;
+    }
+
+
 	int rc;
 	pthread_t threads[NUM_THREADS];
 	pthread_attr_t attr;
@@ -157,6 +169,8 @@ int main(int argc, char* argv[]) {
 	      rc = pthread_create(&threads[i], &attr, count_array, (void *)i);
 	      if (rc) {
 	        printf("ERROR; return code from pthread_create() is %d\n", rc);
+			free(line_numbers);
+			free(results);
 		exit(-1);
 	      }
 	}
@@ -172,6 +186,9 @@ int main(int argc, char* argv[]) {
 	}
 
 	print_results();
+	free(line_numbers);
+    free(results);
+
 
 	// pthread_mutex_destroy(&mutexsum);
 	printf("Main: program completed. Exiting.\n");
