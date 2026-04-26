@@ -40,7 +40,7 @@ do
       --mem-per-cpu=$mem \
       --output="logs/mem/out_mem${mem}_run${run}_%j.txt" \
       --error="logs/mem/err_mem${mem}_run${run}_%j.txt" \
-      run_mpi.sh
+      Submit.sh
   done
 done
 
@@ -58,6 +58,6 @@ do
       --mem-per-cpu=512M \
       --output="logs/nodes/out_nodes${nodes}_run${run}_%j.txt" \
       --error="logs/nodes/err_nodes${nodes}_run${run}_%j.txt" \
-      run_mpi.sh
+      Sumbit.sh
   done
 done
