@@ -2,9 +2,9 @@
 
 mkdir -p logs/cores logs/mem logs/nodes
 
-tasks_list=(1 2 4 8 16 32)
+tasks_list=(1 4 16)
 mem_list=(64M 128M 512M 1G 1536M 3G)
-node_list=(1 2 4 8)
+node_list=(1 4)
 
 repeats=5
 
