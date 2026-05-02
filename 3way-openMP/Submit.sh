@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --job-name=hw4-openmp
+#SBATCH --output=hw4-openmp.out
+#SBATCH --error=hw4-openmp.err
+#SBATCH --time=00:10:00
+#SBATCH --nodes=1               #Should stay at 1
+#SBATCH --cpus-per-task=8       #Parameter to Change
+#SBATCH --mem-per-cpu=1G        #Parameter to change
+#SBATCH --constraint=moles
+
+module load CMake/3.23.1-GCCcore-11.3.0 foss/2022a OpenMPI/4.1.4-GCC-11.3.0 CUDA/11.7.0
+
+make
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+/usr/bin/time -v ./pt3 > /dev/null

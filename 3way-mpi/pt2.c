@@ -159,7 +159,10 @@ int main(int argc, char* argv[])
 	}
 	//Sends data between processes so all the data ends up in the root process
 	MPI_Bcast(&num_lines_read, 1, MPI_INT, 0, MPI_COMM_WORLD);
-	MPI_Bcast(line_numbers, MAX_LINES * MAX_LINE_LEN, MPI_CHAR, 0, MPI_COMM_WORLD);
+	 for(int i = 0; i < num_lines_read; i++)
+    {
+        MPI_Bcast(line_numbers[i], MAX_LINE_LEN, MPI_CHAR>
+    }
 
 	int *localResults = calloc(MAX_LINES, sizeof(int));  //Creates memory for the results we get from the different machines running the program.'
 	//If there are no local results returned an error message is returned.

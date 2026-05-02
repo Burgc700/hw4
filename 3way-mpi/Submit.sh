@@ -10,4 +10,4 @@
 #SBATCH --constraint=moles
 
 make
-time srun ./pt2
+/usr/bin/time -v mpirun -np $SLURM_NTASKS ./pt2 > /dev/null

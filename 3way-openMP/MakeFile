@@ -1,0 +1,11 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -O2 -fopenmp
+TARGET = pt3
+
+all: $(TARGET)
+
+$(TARGET): pt3.c
+	$(CC) $(CFLAGS) pt3.c -o $(TARGET)
+
+clean:
+	rm -f $(TARGET) *.o
